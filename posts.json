@@ -1,6 +1,32 @@
 [
   {
     "slug": "2026-11-03-sala",
-    "titulo": "Sala de revista com preço de Shopee"
+    "titulo": "Sala de revista com preço de Shopee",
+    "produtos": [
+      {
+        "nome": "rack orgânico"
+      },
+      {
+        "nome": "cristaleira"
+      },
+      {
+        "nome": "espelho orgânico"
+      },
+      {
+        "nome": "mesa de jantar"
+      },
+      {
+        "nome": "tapete felpudo"
+      },
+      {
+        "nome": "aparador bar"
+      },
+      {
+        "nome": "sofá bouclê bege"
+      },
+      {
+        "nome": "vaso de vidro canelado"
+      }
+    ]
   }
 ]
