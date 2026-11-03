@@ -1,0 +1,38 @@
+# Robô do QUERO: a cada 10 minutos responde no direct quem comentou QUERO nos posts do @tudonashoope1
+# com o link da página de produtos daquele carrossel. Código em .github/responder.mjs (cópia de scripts/responder.mjs do projeto).
+name: Responder QUERO
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: quero
+  cancel-in-progress: false
+jobs:
+  responder:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Responder comentários
+        env:
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+        run: node .github/responder.mjs --site . --estado respondidos.json
+      # Guarda quem já foi respondido, para não mandar duas vezes.
+      - name: Salvar respondidos
+        run: |
+          if [ -n "$(git status --porcelain respondidos.json)" ]; then
+            git config user.name "robo-quero"
+            git config user.email "robo-quero@users.noreply.github.com"
+            git add respondidos.json
+            git commit -m "Respondidos"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
