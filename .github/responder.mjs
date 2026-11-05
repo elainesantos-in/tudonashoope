@@ -7,7 +7,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 const API = 'https://graph.facebook.com/v26.0';
-const URL_SITE = 'https://elainesantos-in.github.io/tudonashoope';
+const URL_SITE = 'https://tudonashoope.pages.dev';
 const args = process.argv.slice(2);
 const opcao = (nome, padrao) => (args.includes(nome) ? args[args.indexOf(nome) + 1] : padrao);
 const SITE = resolve(opcao('--site', join(import.meta.dirname, '..', 'site')));
